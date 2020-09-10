@@ -1,0 +1,36 @@
+lamda functions for data insertion----------------------  
+
+******************************sanitizerappdatabaseinsertion****************
+
+import json
+import boto3
+
+dynamoDB = boto3.resource('dynamodb')
+table= dynamoDB.Table('sanitizerAppDB')
+
+def lambda_handler(event, context):
+    
+    # TODO implement
+    print("event")
+    print(event)
+    table.put_item(Item=event)
+    return {"Code": 200,"Message":"Registration successful"}
+
+
+lamda function for data retrieval-----------------------
+
+***************************sanitizerappretrievedata**************************
+
+import json
+import boto3
+
+dynamoDB = boto3.resource('dynamodb')
+table= dynamoDB.Table('sanitizerAppDB')
+
+def lambda_handler(event, context):
+    
+    # TODO implement
+    name = event['Name']
+    print(name)
+    resp=table.get_item(Key={"Name":name})
+    return resp['Item']
